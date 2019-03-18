@@ -1,12 +1,39 @@
 # HelloCG
+Hello Computer Graphics is a classic implementation of the Hello World equivalent
+in graphics programing, a triangle with red, green and blue vertices.
 
-I'm using version 4.5 of OpenGL in my machine. GLFW can't create a window in 4.6
-context, probaly because my drivers dont have this version of OpenGL
+The latest version of OpenGL available in the development environment was 4.5.
 
-### Doubts
+HelloCG code available on file `/src/main.cpp`.
 
-* Difference between glBufferStorage and glBufferData?
-* vertices[] with position and color, or one array for each attribute?
+This implementation was thought to work on the main desktop platforms (Linux, MacOS and Windows), but tested in only one environment so far.
+
+For window and input control, GLFW is used, available in `/3rdparty/glfw`.
+
+GLAD is used to properly load OpenGL functions, available in `/3rdparty/glfw/deps/glad`.
+
+GLFW and GLAD are compiled and linked using cmake.
+
+## Description of the development and testing environment
+* OS: Arch Linux 
+* Kernel: x86_64 Linux 5.0.2-arch1-1-ARCH
+* CPU: Intel Core i7-5500U @ 4x 3GHz
+* GPU: intel
+* Compiler: GCC 8.2.1
+
+## Dependencies
+* CMake 3.9 or greater
+* Graphic card and graphic driver with suport to OpenGL 4.5
+* C++ compiler (GCC, Clang or MSVC)
+
+### How to compile and run
+```shell
+mkdir build
+cd build
+cmake ..
+make
+./hcg
+```
 
 ### Thanks
- * To https://learnopengl.com for share a nice tutorial
+ * To Joey de Vries for share a nice tutorial in https://learnopengl.com 

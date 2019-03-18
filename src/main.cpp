@@ -6,16 +6,16 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
-const unsigned int SCR_WIDTH = 80 * 16;
-const unsigned int SCR_HEIGHT = 80 * 9;
+const unsigned int SCR_WIDTH = 200 * 4;
+const unsigned int SCR_HEIGHT = 200 * 3;
 
 const char *vertexShaderSource = "#version 450 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
+    "layout (location = 0) in vec2 aPos;\n"
     "layout (location = 1) in vec3 aColor;\n"
     "out vec3 ourColor;\n"
     "void main()\n"
     "{\n"
-    "    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "    gl_Position = vec4(aPos.x, aPos.y, 0.0, 1.0);\n"
     "    ourColor = aColor;\n"
     "}\0";
 
@@ -114,10 +114,10 @@ int main(){
 
 
     float vertices[] = {//Debug, task require 2D position
-    // positions         // colors
-     0.8f, -0.8f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-    -0.8f, -0.8f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-     0.0f,  0.8f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
+    // positions   // colors
+    -0.8f, -0.8f,  1.0f, 0.0f, 0.0f,   // bottom left
+     0.0f,  0.8f,  0.0f, 1.0f, 0.0f,   // top
+     0.8f, -0.8f,  0.0f, 0.0f, 1.0f    // bottom right 
 };
 
     unsigned int VBO, VAO;
@@ -130,11 +130,11 @@ int main(){
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // Position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
     // Color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3* sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2* sizeof(float)));
     glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -159,8 +159,8 @@ int main(){
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    // glDeleteVertexArrays(1, &VAO);
-    // glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
     glfwTerminate();
