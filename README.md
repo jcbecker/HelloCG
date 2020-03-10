@@ -28,6 +28,9 @@ GLFW and GLAD are compiled and linked using cmake.
 
 ### How to compile and run
 ```shell
+cd HelloCG
+git submodule init
+git submodule update
 mkdir build
 cd build
 cmake ..
